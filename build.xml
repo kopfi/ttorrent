@@ -1,0 +1,71 @@
+<!--Copyright 2013 Kopfensteiner Michael
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+
+<project name="Ttorrent_kopfi" default="compile" basedir=".">
+    <description>This is my adaptation of the original Ttorrent source code,
+developed by Turn (http://www.turn.com). Ttorrent ist a pure-java implementation
+of the BitTorrent protocol. This piece of software may either be used within a
+larger piece of software, or on its own as commandline tool.
+Licensed under the Apache License, Version 2.0 (the "License").</description>
+  
+  <!-- system properties -->
+  <property name="build.sysclasspath" value="ignore" />
+    
+  <!-- custom properties -->
+  <property name="dir.src" location="src"/>
+  <property name="dir.build" location="build"/>
+  <property name="dir.buildjar" location="${dir.build}/jar" />
+  <property name="dir.buildclasses" location="${dir.build}/classes" />
+  <property name="dir.libraries"	location="../lib/" />
+  	<!-- avoid .jar at this point, it will be added later -->
+  <property name="jarfilename" value="ttorrent" />
+  
+
+  <target name="init"
+   description="this initializes the build directory" >
+    <mkdir dir="${dir.build}"/>
+    <mkdir dir="${dir.buildclasses}" />
+    <mkdir dir="${dir.buildjar}" />
+  </target>
+  
+  <target name="cleanup-classes"
+   description="this deletes all class binaries and their containing folder">
+   <!-- this target allows the user to delete all class files after the
+   compilation succeeded, this helps to save space. -->
+  	<delete dir="${dir.buildclasses}"/>
+  </target>
+  
+  <target name="cleanup" depends="cleanup-classes"
+   description="this deletes the binaries and their containing directories">
+   
+   	<delete dir="${dir.buildjar}"/>
+    <delete dir="${dir.build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+   description="this compiles the sources to class files">
+   	<javac srcdir="${dir.src}" destdir="${dir.buildclasses}">
+		<classpath>
+			<fileset dir="${dir.libraries}">
+				<include name="*.jar" />
+			</fileset>
+		</classpath>
+    </javac>
+  </target>
+  
+  <target name="jar" depends="compile"
+   description="this bundles everything into a jar file">
+   <jar jarfile="${dir.buildjar}/lib${jarfilename}.jar" 
+    basedir="${dir.buildclasses}" />
+  </target>
+</project>

@@ -17,6 +17,7 @@ To successfully build the binary files, you need following software:
 	* log4j library (tested with 1.2.16)
 	* slf4j library (tested with 1.6.5)
 	* simpleframework library (currently only working with 4.1.21!!!)
+	* JArgs library (tested with release 1.0)
 
 If you are missing one of those pieces, here are some project pages to fetch
 them:
@@ -28,6 +29,7 @@ Apache-Commons: http://commons.apache.org/
 log4j: http://logging.apache.org/log4j/1.2/download.html
 slf4j: http://www.slf4j.org/
 simpleframework: http://sourceforge.net/projects/simpleweb/
+jargs: http://jargs.sourceforge.net/
 
 ... or you just install the missing parts through your systems package manager.
 
