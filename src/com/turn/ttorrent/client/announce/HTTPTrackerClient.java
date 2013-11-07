@@ -126,6 +126,7 @@ public class HTTPTrackerClient extends TrackerClient {
 			// Parse and handle the response
 			HTTPTrackerMessage message =
 				HTTPTrackerMessage.parse(ByteBuffer.wrap(baos.toByteArray()));
+			baos.close();	//close stream
 			this.handleTrackerAnnounceResponse(message, inhibitEvents);
 		} catch (IOException ioe) {
 			throw new AnnounceException("Error reading tracker response!", ioe);
