@@ -4,25 +4,40 @@ Howto build and use the BitTorrent library
 Dependencies
 ------------
 
-This Java implementation of the BitTorrent protocol implements a BitTorrent
-tracker (an HTTP service), and a BitTorrent client. The only dependencies of
-the BitTorrent library are:
+This is my personal adaptation of Turn's (http://www.turn.com) BitTorrent
+library Ttorrent. In contrast to the original library sources, the sources
+you are currently lurking through will build using the Apache Ant tool.
 
-* the log4j library
-* the slf4j logging library
-* the SimpleHTTPFramework
+To successfully build the binary files, you need following software:
+	* Apache Ant (tested with 1.8.2)
+	* a functional Java compiler, everything up 1.6 should work
+	  (tested with IceTea6 1.12.6, equivalent to java version 1.6.0_27)
+	* apache-commons-io library (tested with version 2.4)
+	* apache-commons-codec library (tested with version 1.8)
+	* log4j library (tested with 1.2.16)
+	* slf4j library (tested with 1.6.5)
+	* simpleframework library (currently only working with 4.1.21!!!)
 
-These libraries are provided in the lib/ directory, and are automatically
-included in the JAR file created by the build process.
+If you are missing one of those pieces, here are some project pages to fetch
+them:
+
+Apache Ant: http://ant.apache.org/srcdownload.cgi
+OpenJDK: http://openjdk.java.net/
+Oracle JDK: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+Apache-Commons: http://commons.apache.org/
+log4j: http://logging.apache.org/log4j/1.2/download.html
+slf4j: http://www.slf4j.org/
+simpleframework: http://sourceforge.net/projects/simpleweb/
+
+... or you just install the missing parts through your systems package manager.
 
 
-Building the distribution JAR
+
+Building the binaries
 -----------------------------
 
-Simply execute the following command:
+Building the binary files should be a easy as calling
 
-  $ mvn package
+	ant
 
-To build the library's JAR file (in the target/ directory). You can then import
-this JAR file into your Java project and start using the Java BitTorrent
-library.
+from your commandline at the root folder of this project.
