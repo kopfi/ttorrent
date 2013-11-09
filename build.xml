@@ -65,7 +65,25 @@ Licensed under the Apache License, Version 2.0 (the "License").</description>
   
   <target name="jar" depends="compile"
    description="this bundles everything into a jar file">
-   <jar jarfile="${dir.buildjar}/lib${jarfilename}.jar" 
-    basedir="${dir.buildclasses}" />
+   <jar jarfile="${dir.buildjar}/${jarfilename}_complete.jar" >
+   	<fileset dir="${dir.buildclasses}" includes="**/*.class" />
+   	<fileset dir="." includes="COPYING" />
+   </jar>
+  </target>
+  
+  <target name="libjar" depends="compile"
+   description="this bundles everything needed for a library up into a jar file,
+   but avoids adding commandline executibles">
+    <jar jarfile="${dir.buildjar}/lib${jarfilename}.jar">
+    <fileset dir="${dir.buildclasses}" includes="**/*.class"
+    	excludes="**/cli/*.class"/>
+   	<fileset dir="." includes="COPYING" />
+    </jar>
+  </target>
+  
+  <target name="all" depends="compile,jar,libjar"
+   description="this runs all build-targets (compile,jar and libjar)">
+   	<echo>Completed all targets. If everthing went well, the results are now in
+the ${dir.build} directory.</echo>
   </target>
 </project>
