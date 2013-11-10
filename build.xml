@@ -68,6 +68,40 @@ Licensed under the Apache License, Version 2.0 (the "License").</description>
    <jar jarfile="${dir.buildjar}/${jarfilename}_complete.jar" >
    	<fileset dir="${dir.buildclasses}" includes="**/*.class" />
    	<fileset dir="." includes="COPYING" />
+   	<manifest>
+    	<attribute name="Main-Class"
+         value="com.turn.ttorrent.cli.ClientMain"/>
+    </manifest>
+   </jar>
+  </target>
+  
+  <target name="client" depends="compile"
+   description="this bundles everything for the client-side into an executable
+   jar file">
+   <jar jarfile="${dir.buildjar}/${jarfilename}_client.jar" >
+   	<fileset dir="${dir.buildclasses}" includes="**/*.class" 
+   		excludes="**/tracker/*.class,**/cli/TrackerMain.class,
+   		**/cli/TrackerMain??.class"/>
+   	<fileset dir="." includes="COPYING" />
+   	<manifest>
+    	<attribute name="Main-Class"
+         value="com.turn.ttorrent.cli.ClientMain"/>
+    </manifest>
+   </jar>
+  </target>
+  
+  <target name="tracker" depends="compile"
+   description="this bundles everything for the tracker into an executable
+   jar file">
+   <jar jarfile="${dir.buildjar}/${jarfilename}_tracker.jar" >
+   	<fileset dir="${dir.buildclasses}" includes="**/*.class" 
+   		excludes="**/client/**/*.class,**/cli/ClientMain.class,
+   		**/cli/ClientMain??.class"/>
+   	<fileset dir="." includes="COPYING" />
+   	<manifest>
+    	<attribute name="Main-Class"
+         value="com.turn.ttorrent.cli.TrackerMain"/>
+    </manifest>
    </jar>
   </target>
   
@@ -75,9 +109,9 @@ Licensed under the Apache License, Version 2.0 (the "License").</description>
    description="this bundles everything needed for a library up into a jar file,
    but avoids adding commandline executibles">
     <jar jarfile="${dir.buildjar}/lib${jarfilename}.jar">
-    <fileset dir="${dir.buildclasses}" includes="**/*.class"
-    	excludes="**/cli/*.class"/>
-   	<fileset dir="." includes="COPYING" />
+    	<fileset dir="${dir.buildclasses}" includes="**/*.class"
+    		excludes="**/cli/*.class"/>
+    		<fileset dir="." includes="COPYING" />
     </jar>
   </target>
   
